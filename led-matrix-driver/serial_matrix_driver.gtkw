@@ -1,0 +1,31 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Tue Jul  8 03:59:43 2025
+[*]
+[dumpfile] "/home/dt/Documents/fpga/serial_matrix_driver/serial_matrix_driver.vcd"
+[dumpfile_mtime] "Tue Jul  8 03:54:12 2025"
+[dumpfile_size] 2189001
+[savefile] "/home/dt/Documents/fpga/serial_matrix_driver/serial_matrix_driver.gtkw"
+[timestart] 0
+[size] 1920 1033
+[pos] -1 -1
+*-30.500000 4790000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] serial_matrix_driver.
+[sst_width] 297
+[signals_width] 230
+[sst_expanded] 1
+[sst_vpaned_height] 310
+@28
+serial_matrix_driver.spi.sck
+serial_matrix_driver.spi.sdi
+serial_matrix_driver.spi.cs
+serial_matrix_driver.spi.q[23:0]
+serial_matrix_driver.spi.latch_en
+@24
+serial_matrix_driver.spi.cnt[4:0]
+@28
+serial_matrix_driver.DIN
+@29
+serial_matrix_driver.pixel_data[23:0]
+[pattern_trace] 1
+[pattern_trace] 0
