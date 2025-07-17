@@ -20,13 +20,18 @@ def create_binary_animation(frames, output_file):
                 f.write(struct.pack("BBB", *pixel))
 
 
-def generate_color_frame(position):
+def generate_color_frame(position, brightness=1.0, num_positions=512):
     """Generate a frame where all LEDs are the same color based on the position."""
     # Calculate the angle for the color wheel
-    angle = position * (360 / 256)  # 256 positions for smooth transition
-    # Convert angle to RGB
-    r, g, b = hsl_to_rgb(angle / 360.0, 1.0, 0.5)  # Full saturation and lightness
-    return [(int(r * 32), int(g * 32), int(b * 32)) for _ in range(64)]
+    angle = position * (360 / num_positions)
+    r, g, b = hsl_to_rgb(angle / 360.0, 1.0, 0.5)
+
+    # Apply brightness scaling
+    r = int(max(0, min(255, r * brightness * 256)))
+    g = int(max(0, min(255, g * brightness * 256)))
+    b = int(max(0, min(255, b * brightness * 256)))
+
+    return [(r, g, b) for _ in range(64)]
 
 
 def hsl_to_rgb(h, s, l):
@@ -55,16 +60,35 @@ def hsl_to_rgb(h, s, l):
     return (r, g, b)
 
 
-def main():
-    # Generate frames for a smooth color cycle
-    frames = []
-    for position in range(256):  # 256 positions for smooth transition
-        frames.append(generate_color_frame(position))
+def interpolate_color(start_color, end_color, steps):
+    """Interpolate between two colors."""
+    return [
+        (
+            int(start_color[0] + (end_color[0] - start_color[0]) * i / steps),
+            int(start_color[1] + (end_color[1] - start_color[1]) * i / steps),
+            int(start_color[2] + (end_color[2] - start_color[2]) * i / steps),
+        )
+        for i in range(steps + 1)
+    ]
 
+
+def main(num_positions=512, brightness=0.5, steps=10):
+    frames = []
+
+    for position in range(num_positions):
+        current_color = generate_color_frame(position, brightness, num_positions)[0]
+
+        next_color = generate_color_frame(
+            (position + 1) % num_positions, brightness, num_positions
+        )[0]
+
+        interpolated_colors = interpolate_color(current_color, next_color, steps)
+        for color in interpolated_colors:
+            frames.append([color] * 64)
     output_file = "color_cycle_animation.bin"
     create_binary_animation(frames, output_file)
     print(f"Animation saved to {output_file}")
 
 
 if __name__ == "__main__":
-    main()
+    main(num_positions=256, brightness=0.05, steps=5)

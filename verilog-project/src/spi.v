@@ -2,7 +2,7 @@
 `default_nettype none
 
 // Simulation timestep
-`timescale 1us / 100ns
+`timescale 1ns / 10ps
 
 module spi (
     input sck,

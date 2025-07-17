@@ -61,6 +61,7 @@ async def simulate_spi_frame_24b(dut, data):
         dut.CS.value = 0
         await simulate_spi_frame_no_cs(dut, data)
         dut.CS.value = 1
+
     # await simulate_spi_frame_8b(dut, data[0:8])
     # await simulate_spi_frame_8b(dut, data[8:16])
     # await simulate_spi_frame_8b(dut, data[16:24])
@@ -69,6 +70,8 @@ async def simulate_spi_frame_24b(dut, data):
 @cocotb.test()
 async def test_serial_matrix_driver(dut):
     clock = Clock(dut.CLK, 83.3, units="ns")
+    dut.VGND.value = 0
+    dut.VPWR.value = 1
     cocotb.start_soon(clock.start())
 
     dut.SCK.value = 0

@@ -1,0 +1,27 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Thu Jul 17 23:43:20 2025
+[*]
+[dumpfile] "/home/dt/Documents/z2a/led-matrix-driver/verilog-project/spi.vcd"
+[dumpfile_mtime] "Thu Jul 17 23:41:18 2025"
+[dumpfile_size] 497913
+[savefile] "/home/dt/Documents/z2a/led-matrix-driver/verilog-project/spi.gtkw"
+[timestart] 480230000
+[size] 1920 1033
+[pos] -1 -1
+*-23.200001 45990 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[sst_width] 297
+[signals_width] 182
+[sst_expanded] 1
+[sst_vpaned_height] 309
+@28
+spi.sck
+@22
+spi.received_data[23:0]
+@28
+spi.clk
+spi.sck_rising_edge
+@29
+spi.cs
+[pattern_trace] 1
+[pattern_trace] 0

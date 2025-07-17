@@ -33,8 +33,14 @@ test_$(PROJECT):
 test_spi:
 	rm -rf sim_build/
 	mkdir sim_build/
-	iverilog -o sim_build/sim.vvp -s spi -s dump -g2012 spi.v test/dump_spi.v
+	iverilog -o sim_build/sim.vvp -s spi -s dump -g2012 src/spi.v test/dump_spi.v
 	PYTHONOPTIMIZE=${NOASSERT} MODULE=test.test_spi vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus sim_build/sim.vvp
+	! grep failure results.xml
+test_gate_level:
+	rm -rf sim_build/
+	mkdir sim_build/
+	iverilog -o sim_build/sim.vvp -s serial_matrix_driver -s dump -g2012 gl/serial_matrix_driver.v test/dump_serial_matrix_driver.v -I $(PDK_ROOT)/sky130A
+	PYTHONOPTIMIZE=${NOASSERT} MODULE=test.test_gl vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus sim_build/sim.vvp
 	! grep failure results.xml
 show_%: %.vcd %.gtkw
 	gtkwave $^
